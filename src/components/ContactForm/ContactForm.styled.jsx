@@ -12,7 +12,6 @@ margin-top: 12px;
   }
 `;
 
-
 export const Label = styled.label`
   display: flex;
   flex-direction: column;

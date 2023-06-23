@@ -1,8 +1,10 @@
 import { Component } from 'react';
-// import { nanoid } from 'nanoid';
+import { nanoid } from 'nanoid';
 
 import Section from "./Section";
-import { ContactForm } from './ContactForm/ContactForm';
+import ContactForm from './ContactForm';
+import FilterInput from './FilterInput/FilterInput';
+import ContactsList from './ContactsList/ContactsList';
 
 export default class App extends Component {
 
@@ -16,22 +18,47 @@ export default class App extends Component {
     filter: '',
   };
 
-  render() {
+  addContact = data => {
+    const { contacts } = this.state;
+    const newContact = {
+      ...data,
+      id: nanoid(),
+    };
 
+    contacts.some(({ name }) => name === data.name)
+      ? alert(`${data.name} is duplicate contact`)
+      : this.setState(prevState => ({
+        contacts: [...prevState.contacts, newContact],
+      }));
+  };
+
+  deleteContact = userId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== userId),
+    }));
+  };
+
+  handleChangeFilter = ({ currentTarget: { value } }) => {
+    this.setState({ filter: value });
+  };
+
+  getFilterContacts = () => {
+    const { filter, contacts } = this.state;
+     return contacts.filter(({ name }) =>
+      name.toLowerCase().includes(filter.toLowerCase())
+    );
+  };
+
+  render() {
     return (
       <>
         <Section title="Phonebook">
           <ContactForm addContact={this.addContact} />
         </Section>
         <Section title="Contacts">
-          {/* <Filter value={filter} handleChangeFilter={this.handleChangeFilter} /> */}
-
-          {/* <ContactList
-            contacts={this.getFilterContacts()}
-            deleteContact={this.deleteContact}
-          /> */}
+          <FilterInput value={this.state.filter} onChangeFilter={this.handleChangeFilter} />
+          <ContactsList contacts={this.getFilterContacts()} delContact={this.deleteContact} />
         </Section>
       </>)
   }
 }
-
