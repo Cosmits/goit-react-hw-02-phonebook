@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 
 export const Label = styled.label`
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -8,7 +9,7 @@ export const Label = styled.label`
   font-weight: 500;
 `;
 export const Input = styled.input`
-  width: 250px;
-  padding: 5px;
+  font-size: 14px;
+  padding: 10px;
   border-radius: 5px;
 `;

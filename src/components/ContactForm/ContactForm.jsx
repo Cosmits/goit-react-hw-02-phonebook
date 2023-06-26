@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Form, Label } from './ContactForm.styled';
+import { Button, Form, Label, InputForm } from './ContactForm.styled';
 
 class ContactForm extends Component {
   state = {
@@ -15,7 +15,7 @@ class ContactForm extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.addContact(...this.state);
+    this.props.addContact(this.state);
     this.formReset();
   };
 
@@ -25,12 +25,12 @@ class ContactForm extends Component {
       number: '',
     });
   };
-  
+
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
         <Label>
-          <input
+          <InputForm
             onChange={this.handleChange}
             type="text"
             name="name"
@@ -41,7 +41,7 @@ class ContactForm extends Component {
           />Name
         </Label>
         <Label>
-          <input
+          <InputForm
             onChange={this.handleChange}
             type="tel"
             name="number"

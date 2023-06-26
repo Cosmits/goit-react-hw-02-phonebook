@@ -19,10 +19,20 @@ export const Label = styled.label`
   font-size: 14px;
   font-weight: 700;
 
-  & input {
+  /* & input {
     font-size: 14px;
     padding: 10px;
-  }
+  } */
+`;
+
+export const InputForm = styled.input`
+  font-size: 14px;
+  padding: 10px;
+  border-radius: 5px;
+`;
+
+export const input = styled.input`
+  background-color: aqua;
 `;
 
 export const Button = styled.button`
